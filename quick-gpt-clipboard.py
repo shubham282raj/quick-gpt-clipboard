@@ -4,14 +4,16 @@ import os
 client = OpenAI()
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
 
-prompt = "Which is the most popular programming language for machine learning?"
+def get_content(prompt):
+    completion = client.chat.completions.create(
+        model = 'gpt-3.5-turbo',
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return completion.choices[0].message.content
 
-completion = client.chat.completions.create(
-    model = 'gpt-3.5-turbo',
-    messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-    ]
-)
+promt = input("Ask something?")
 
-print(completion.choices[0].message.content)
+print(get_content(promt))
