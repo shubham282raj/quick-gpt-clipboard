@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import pyperclip
+import time
 
 client = OpenAI()
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
@@ -27,3 +28,5 @@ while(True):
 
         print(response)
         print("\nWaiting for you to copy again\n")
+    else:
+        time.sleep(2)
