@@ -1,5 +1,6 @@
 from openai import OpenAI
 import os
+import pyperclip
 
 client = OpenAI()
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
@@ -14,6 +15,11 @@ def get_content(prompt):
     )
     return completion.choices[0].message.content
 
-promt = input("Ask something?")
-
-print(get_content(promt))
+lastPrompt = 'init'
+while(True):
+    prompt = pyperclip.paste()
+    if(prompt != lastPrompt):
+        lastPrompt = prompt
+        print("Searching, Please Wait!")
+        print(get_content(prompt))
+        print("\nWaiting for you to copy again\n")
