@@ -2,8 +2,9 @@ from openai import OpenAI
 import os
 import pyperclip
 import time
+import pyautogui
 
-client = OpenAI()
+client = OpenAI()   
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
 
 def get_content(prompt):
@@ -20,13 +21,15 @@ lastPrompt = 'init'
 while(True):
     prompt = pyperclip.paste()
     if(prompt != lastPrompt):
-        print("Searching, Please Wait!")
+        # print("Searching, Please Wait!")
+        pyautogui.press("capslock")
 
         response = get_content(prompt)
         pyperclip.copy(response)
         lastPrompt = response
 
-        print(response)
-        print("\nWaiting for you to copy again\n")
+        pyautogui.press("capslock")
+        # print(response)
+        # print("\nWaiting for you to copy again\n")
     else:
         time.sleep(2)
