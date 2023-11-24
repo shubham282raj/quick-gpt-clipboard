@@ -19,7 +19,11 @@ lastPrompt = 'init'
 while(True):
     prompt = pyperclip.paste()
     if(prompt != lastPrompt):
-        lastPrompt = prompt
         print("Searching, Please Wait!")
-        print(get_content(prompt))
+
+        response = get_content(prompt)
+        pyperclip.copy(response)
+        lastPrompt = response
+
+        print(response)
         print("\nWaiting for you to copy again\n")
