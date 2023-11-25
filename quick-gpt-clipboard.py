@@ -4,6 +4,8 @@ import pyperclip
 import time
 import pyautogui
 
+screenX, screenY = pyautogui.size()
+
 client = OpenAI()   
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
 
@@ -23,6 +25,12 @@ while(True):
     if(prompt != lastPrompt):
         # print("Searching, Please Wait!")
         pyautogui.press("capslock")
+        
+        #mouse positioning for short and long answers
+        mouseX, mouseY = pyautogui.position()
+        if(mouseX < screenX/2){
+            prompt = prompt + " Answer in short"
+        }
 
         response = get_content(prompt)
         pyperclip.copy(response)
